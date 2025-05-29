@@ -27,12 +27,19 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-red-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <div className="w-20 h-1 bg-red-500 mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-600 text-sm font-medium mb-6">
+            📞 Let's Connect
+          </div>
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">Get In Touch</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to bring your creative vision to life? Let's discuss your project and create something amazing together.
           </p>
         </div>
@@ -40,49 +47,50 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Talk</h3>
-              <p className="text-gray-700 mb-8">
+            <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Let's Talk</h3>
+              <p className="text-gray-700 mb-8 text-lg leading-relaxed">
                 I'm always excited to work on new projects and collaborate with creative minds. 
                 Feel free to reach out for any design inquiries or just to say hello!
               </p>
-            </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4 p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl hover:shadow-lg transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <Mail className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-lg">Email</h4>
+                    <a 
+                      href="mailto:keerthikumar6317@gmail.com" 
+                      className="text-gray-600 hover:text-red-500 transition-colors text-lg"
+                    >
+                      keerthikumar6317@gmail.com
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Email</h4>
-                  <a 
-                    href="mailto:keerthikumar6317@gmail.com" 
-                    className="text-gray-600 hover:text-red-500 transition-colors"
-                  >
-                    keerthikumar6317@gmail.com
-                  </a>
-                </div>
-              </div>
 
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Phone</h4>
-                  <a 
-                    href="tel:+919108866317" 
-                    className="text-gray-600 hover:text-red-500 transition-colors"
-                  >
-                    +91 9108866317
-                  </a>
+                <div className="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl hover:shadow-lg transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <Phone className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-lg">Phone</h4>
+                    <a 
+                      href="tel:+919108866317" 
+                      className="text-gray-600 hover:text-blue-500 transition-colors text-lg"
+                    >
+                      +91 9108866317
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send me a message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -96,7 +104,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                     placeholder="Your name"
                   />
                 </div>
@@ -111,7 +119,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -128,7 +136,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                   placeholder="Project inquiry"
                 />
               </div>
@@ -144,16 +152,17 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none bg-gray-50 focus:bg-white"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition-all hover:scale-105"
+                className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium group"
               >
                 Send Message
+                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Button>
             </form>
           </div>
