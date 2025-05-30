@@ -1,12 +1,18 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Download } from 'lucide-react';
+import myImage from '/images/pofile.webp';
 
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     element?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  function handleResumeClick(){
+    window.open("https://drive.google.com/file/d/1PracftXRPmq2svds6xKF2lzPqrj7moQa/view?usp=sharing", "_blank");
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
@@ -52,9 +58,12 @@ const Hero = () => {
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button 
+              onClick={handleResumeClick}
                 variant="outline" 
                 className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 text-lg font-medium group"
+                
               >
+                 
                 <Download className="mr-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
                 Download CV
               </Button>
@@ -80,11 +89,12 @@ const Hero = () => {
           {/* Profile Image */}
           <div className="flex justify-center lg:justify-end">
             <div className="relative group">
+              
               {/* Main profile container */}
               <div className="relative w-96 h-96 rounded-3xl bg-gradient-to-br from-red-500 to-red-600 p-1 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
                 <div className="w-full h-full rounded-3xl bg-gradient-to-br from-gray-100 to-white flex items-center justify-center overflow-hidden">
                   <div className="w-80 h-80 rounded-2xl bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                    <div className="text-8xl">👨‍💻</div>
+                    <div className="text-8xl"><img src={myImage} alt="Portfolio" style={{ width: '300px' }} /></div>
                   </div>
                 </div>
               </div>

@@ -1,10 +1,14 @@
 
+import { link } from 'fs';
 import { useState } from 'react';
+import VideoPlayer from "./VideoPlayer";
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+    
 
   const projects = [
+    
     {
       id: 1,
       title: "Brand Identity Design",
@@ -19,7 +23,8 @@ const Portfolio = () => {
       category: "Motion Graphics",
       description: "Dynamic motion graphics showcasing various animation techniques and visual effects.",
       image: "🎬",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-blue-500 to-cyan-500",
+      src: "/videos/logo-animation.mp4" 
     },
     {
       id: 3,
@@ -36,6 +41,7 @@ const Portfolio = () => {
       description: "Professional video editing with seamless transitions and color grading.",
       image: "🎥",
       color: "from-red-500 to-orange-500"
+      
     },
     {
       id: 5,
@@ -43,7 +49,8 @@ const Portfolio = () => {
       category: "Digital Design",
       description: "User interface designs focusing on user experience and modern aesthetics.",
       image: "💻",
-      color: "from-indigo-500 to-purple-500"
+      color: "from-indigo-500 to-purple-500",
+      link: "https://drive.google.com/file/d/1rMFUCYl8JPWScNO71lyx85LByR0Vttxv/view?usp=sharing"
     },
     {
       id: 6,
@@ -55,6 +62,7 @@ const Portfolio = () => {
     }
   ];
 
+  
   return (
     <section id="portfolio" className="py-20 bg-white relative overflow-hidden">
       {/* Background decoration */}
@@ -96,7 +104,9 @@ const Portfolio = () => {
             </div>
           ))}
         </div>
-
+                   
+                  
+                    
         {/* Project Modal */}
         {selectedProject && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -119,9 +129,30 @@ const Portfolio = () => {
                 <div className="inline-block px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full mb-4">
                   {projects.find(p => p.id === selectedProject)?.category}
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed">
+                <p className="text-gray-700 text-lg leading-relaxed ">
                   {projects.find(p => p.id === selectedProject)?.description}
                 </p>
+
+                <a href={projects.find(p => p.id === selectedProject)?.link} target="_blank" rel="noopener noreferrer"><div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
+                   Open Example in Popup
+                  
+                  <span className="ml-2">→</span>
+                </div>
+                    
+                    </a>
+                { /* <a href={projects.find(p => p.id === selectedProject)?.link}> <div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
+                   View It...!
+                  
+                  <span className="ml-2">→</span>
+                </div></a> */}
+              {/*direct video play method*/}
+                     {selectedProject && (
+                     <video
+                src={projects.find(p => p.id === selectedProject)?.src}
+                controls
+                className="w-full max-w-md rounded-lg"
+                     />
+                     )}
               </div>
             </div>
           </div>
