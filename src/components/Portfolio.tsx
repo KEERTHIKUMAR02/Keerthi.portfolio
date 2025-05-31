@@ -1,7 +1,7 @@
 
 import { link } from 'fs';
 import { useState } from 'react';
-import VideoPlayer from "./VideoPlayer";
+
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -15,7 +15,8 @@ const Portfolio = () => {
       category: "Logo Design",
       description: "Complete brand identity package including logo, color palette, and typography guidelines.",
       image: "🎨",
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing"
     },
     {
       id: 2,
@@ -24,7 +25,8 @@ const Portfolio = () => {
       description: "Dynamic motion graphics showcasing various animation techniques and visual effects.",
       image: "🎬",
       color: "from-blue-500 to-cyan-500",
-      src: "/videos/logo-animation.mp4" 
+      src: "/videos/logo-animation.mp4", 
+      link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing"
     },
     {
       id: 3,
@@ -40,7 +42,8 @@ const Portfolio = () => {
       category: "Video Editing",
       description: "Professional video editing with seamless transitions and color grading.",
       image: "🎥",
-      color: "from-red-500 to-orange-500"
+      color: "from-red-500 to-orange-500",
+       link: "https://drive.google.com/file/d/10Sdfm5rYh6AJhVWtPIAxJFcMLI5RW_HL/view?usp=sharing"
       
     },
     {
@@ -50,7 +53,7 @@ const Portfolio = () => {
       description: "User interface designs focusing on user experience and modern aesthetics.",
       image: "💻",
       color: "from-indigo-500 to-purple-500",
-      link: "https://drive.google.com/file/d/1rMFUCYl8JPWScNO71lyx85LByR0Vttxv/view?usp=sharing"
+      link: "null"
     },
     {
       id: 6,
@@ -132,14 +135,14 @@ const Portfolio = () => {
                 <p className="text-gray-700 text-lg leading-relaxed ">
                   {projects.find(p => p.id === selectedProject)?.description}
                 </p>
-
+                {selectedProject && (
                 <a href={projects.find(p => p.id === selectedProject)?.link} target="_blank" rel="noopener noreferrer"><div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                   Open Example in Popup
+                   Open projects in new Tab
                   
                   <span className="ml-2">→</span>
                 </div>
                     
-                    </a>
+                    </a>)}
                 { /* <a href={projects.find(p => p.id === selectedProject)?.link}> <div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
                    View It...!
                   
@@ -148,7 +151,7 @@ const Portfolio = () => {
               {/*direct video play method*/}
                      {selectedProject && (
                      <video
-                src={projects.find(p => p.id === selectedProject)?.src}
+                src={projects.find(p => p.id === selectedProject )?.src}
                 controls
                 className="w-full max-w-md rounded-lg"
                      />
