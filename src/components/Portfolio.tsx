@@ -137,7 +137,7 @@ const Portfolio = () => {
                 </p>
                 {selectedProject && (
                 <a href={projects.find(p => p.id === selectedProject)?.link} target="_blank" rel="noopener noreferrer"><div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                   Open projects in new Tab
+                   Click Here to Open projects in new Tab
                   
                   <span className="ml-2">→</span>
                 </div>
