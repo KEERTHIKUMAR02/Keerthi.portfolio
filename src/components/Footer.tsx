@@ -66,7 +66,7 @@ const Footer = () => {
                 <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                   💼
                 </div>
-                <span>Available for freelance work</span>
+                <span>Available for work</span>
               </div>
             </div>
           </div>
