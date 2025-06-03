@@ -15,6 +15,7 @@ const Portfolio = () => {
       image: "🎨",
       color: "from-purple-500 to-pink-500",
       link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing",
+      youtubeLink: "https://youtu.be/S6PtKIS0km8",
     },
     {
       id: 2,
@@ -26,7 +27,7 @@ const Portfolio = () => {
       color: "from-blue-500 to-cyan-500",
       src: "/videos/logo-animation.mp4",
       link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing",
-      youtubeLink: "https://youtu.be/S6PtKIS0km8", // Added YouTube link here
+      youtubeLink: "https://youtu.be/S6PtKIS0km8",
     },
     {
       id: 3,
@@ -45,9 +46,8 @@ const Portfolio = () => {
         "Professional video editing with seamless transitions and color grading.",
       image: "🎥",
       color: "from-red-500 to-orange-500",
-      youtubeLink: "https://youtube.com/shorts/B1_FKcY4xUU?feature=share", // Added YouTube link here
+      youtubeLink: "https://youtu.be/T1a-LfXIgWU",
     },
-    
     {
       id: 5,
       title: "UI/UX Concepts",
@@ -71,21 +71,26 @@ const Portfolio = () => {
 
   const selected = projects.find((p) => p.id === selectedProject);
 
-  // Extract YouTube video ID from a URL
+  // Extract YouTube video ID from a URL robustly
   const extractYoutubeID = (url: string) => {
-    const regExp =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : null;
+    if (!url) return null;
+    // Support multiple YouTube URL formats
+    const regex =
+      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
   };
 
   const openVideoModal = () => {
     if (selected?.youtubeLink) {
       const id = extractYoutubeID(selected.youtubeLink);
-      setYoutubeVideoId(id);
-      setIsVideoModalOpen(true);
-    } else if (selected?.src) {
-      // If no YouTube link but local video src exists, open video modal with local video
+      if (id) {
+        setYoutubeVideoId(id);
+        setIsVideoModalOpen(true);
+        return;
+      }
+    }
+    if (selected?.src) {
       setYoutubeVideoId(null);
       setIsVideoModalOpen(true);
     }
@@ -95,6 +100,7 @@ const Portfolio = () => {
     setIsVideoModalOpen(false);
     setYoutubeVideoId(null);
   };
+
   return (
     <section id="portfolio" className="py-20 bg-white relative overflow-hidden">
       {/* Background decoration */}
@@ -167,18 +173,18 @@ const Portfolio = () => {
                   </button>
                 </div>
                 <div
-                  className={`h-64 bg-gradient-to-br ${selected.color} rounded-2xl flex items-center justify-center mb-6`}
+                  className={`h-64 bg-gradient-to-br ${selected.color} rounded-2xl flex items-center justify-center mb-6 relative`}
                 >
                   <div className="text-8xl">{selected.image}</div>
-                   {/* Show video play button if src exists */}
-                {selected.src && (
-                  <button
-                    onClick={openVideoModal}
-                    className="-translate-y-24 translate-x-40  mr-4 ml-1 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                  >
-                    Play Video
-                  </button>
-                )}
+                  {/* Show video play button if YouTube link or local video src exists */}
+                  {(selected.youtubeLink || selected.src) && (
+                    <button
+                      onClick={openVideoModal}
+                      className="absolute bottom-4 right-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    >
+                      Play Video
+                    </button>
+                  )}
                 </div>
                 <div className="inline-block px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full mb-4">
                   {selected.category}
@@ -196,23 +202,13 @@ const Portfolio = () => {
                     Click Here to Open project in new Tab <span className="ml-2">→</span>
                   </a>
                 )}
-
-              
-
-                {/* Always show button to open your YouTube video */}
-               {/* <button
-                  onClick={openVideoModal}
-                  className="mt-6 ml-4 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                >
-                  Watch My YouTube Video
-                </button>*/} 
               </div>
             </div>
           </div>
         )}
 
         {/* Video Modal */}
-        {isVideoModalOpen && youtubeVideoId && (
+        {isVideoModalOpen && (
           <div
             onClick={(e) => {
               if (e.target === e.currentTarget) closeVideoModal();
@@ -227,14 +223,23 @@ const Portfolio = () => {
               >
                 &times;
               </button>
-              <iframe
-                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
-                title="YouTube video player"
-                frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
+              {youtubeVideoId ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
+                  title="YouTube video player"
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              ) : selected?.src ? (
+                <video
+                  src={selected.src}
+                  controls
+                  autoPlay
+                  className="w-full h-full"
+                />
+              ) : null}
             </div>
           </div>
         )}
