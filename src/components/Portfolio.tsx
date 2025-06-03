@@ -1,11 +1,23 @@
 import { useState } from "react";
 
-const Portfolio = () => {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [youtubeVideoId, setYoutubeVideoId] = useState<string | null>(null);
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  color: string;
+  link?: string;
+  src?: string;
+  youtubeLinks?: string[]; // Changed to array for multiple YouTube links
+}
 
-  const projects = [
+const Portfolio = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const projects: Project[] = [
     {
       id: 1,
       title: "Brand Identity Design",
@@ -15,7 +27,7 @@ const Portfolio = () => {
       image: "🎨",
       color: "from-purple-500 to-pink-500",
       link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing",
-      youtubeLink: "https://youtu.be/S6PtKIS0km8",
+      youtubeLinks: ["https://youtu.be/S6PtKIS0km8"],
     },
     {
       id: 2,
@@ -27,7 +39,7 @@ const Portfolio = () => {
       color: "from-blue-500 to-cyan-500",
       src: "/videos/logo-animation.mp4",
       link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing",
-      youtubeLink: "https://youtu.be/S6PtKIS0km8",
+      youtubeLinks: ["https://youtu.be/S6PtKIS0km8","https://youtu.be/zdniEgUvMfA"],
     },
     {
       id: 3,
@@ -46,7 +58,7 @@ const Portfolio = () => {
         "Professional video editing with seamless transitions and color grading.",
       image: "🎥",
       color: "from-red-500 to-orange-500",
-      youtubeLink: "https://youtu.be/T1a-LfXIgWU",
+      youtubeLinks: ["https://youtu.be/T1a-LfXIgWU"],
     },
     {
       id: 5,
@@ -69,12 +81,9 @@ const Portfolio = () => {
     },
   ];
 
-  const selected = projects.find((p) => p.id === selectedProject);
-
   // Extract YouTube video ID from a URL robustly
   const extractYoutubeID = (url: string) => {
     if (!url) return null;
-    // Support multiple YouTube URL formats
     const regex =
       /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
@@ -82,24 +91,36 @@ const Portfolio = () => {
   };
 
   const openVideoModal = () => {
-    if (selected?.youtubeLink) {
-      const id = extractYoutubeID(selected.youtubeLink);
-      if (id) {
-        setYoutubeVideoId(id);
-        setIsVideoModalOpen(true);
-        return;
-      }
-    }
-    if (selected?.src) {
-      setYoutubeVideoId(null);
-      setIsVideoModalOpen(true);
-    }
+    setCurrentVideoIndex(0);
+    setIsVideoModalOpen(true);
   };
 
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
-    setYoutubeVideoId(null);
+    setCurrentVideoIndex(0);
   };
+
+  const nextVideo = () => {
+    if (!selectedProject?.youtubeLinks) return;
+    setCurrentVideoIndex((prev) =>
+      prev + 1 < selectedProject.youtubeLinks!.length ? prev + 1 : 0
+    );
+  };
+
+  const prevVideo = () => {
+    if (!selectedProject?.youtubeLinks) return;
+    setCurrentVideoIndex((prev) =>
+      prev - 1 >= 0 ? prev - 1 : selectedProject.youtubeLinks!.length - 1
+    );
+  };
+
+  const currentYoutubeId =
+    selectedProject && selectedProject.youtubeLinks && selectedProject.youtubeLinks.length > 0
+      ? extractYoutubeID(selectedProject.youtubeLinks[currentVideoIndex])
+      : null;
+
+  const hasMultipleVideos =
+    selectedProject?.youtubeLinks && selectedProject.youtubeLinks.length > 1;
 
   return (
     <section id="portfolio" className="py-20 bg-white relative overflow-hidden">
@@ -125,7 +146,7 @@ const Portfolio = () => {
             <div
               key={project.id}
               className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer border border-gray-100"
-              onClick={() => setSelectedProject(project.id)}
+              onClick={() => setSelectedProject(project)}
             >
               <div
                 className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}
@@ -155,17 +176,17 @@ const Portfolio = () => {
         </div>
 
         {/* Project Modal */}
-        {selectedProject && selected && (
+        {selectedProject && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
-                  <h3 className="text-3xl font-bold text-gray-900">{selected.title}</h3>
+                  <h3 className="text-3xl font-bold text-gray-900">{selectedProject.title}</h3>
                   <button
                     onClick={() => {
                       setSelectedProject(null);
                       setIsVideoModalOpen(false);
-                      setYoutubeVideoId(null);
+                      setCurrentVideoIndex(0);
                     }}
                     className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all"
                   >
@@ -173,28 +194,26 @@ const Portfolio = () => {
                   </button>
                 </div>
                 <div
-                  className={`h-64 bg-gradient-to-br ${selected.color} rounded-2xl flex items-center justify-center mb-6 relative`}
+                  className={`h-64 bg-gradient-to-br ${selectedProject.color} rounded-2xl flex items-center justify-center mb-6 relative`}
                 >
-                  <div className="text-8xl">{selected.image}</div>
-                  {/* Show video play button if YouTube link or local video src exists */}
-                  {(selected.youtubeLink || selected.src) && (
+                  <div className="text-8xl">{selectedProject.image}</div>
+                  {(selectedProject.youtubeLinks?.length || selectedProject.src) && (
                     <button
                       onClick={openVideoModal}
-                      className="absolute bottom-4 right-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                      className="absolute bottom-4 right-4 px-6 py-2 rounded-lg text-white font-semibold transition bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:from-pink-600 hover:via-red-600 hover:to-yellow-600"
                     >
                       Play Video
                     </button>
                   )}
                 </div>
                 <div className="inline-block px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                  {selected.category}
+                  {selectedProject.category}
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed">{selected.description}</p>
+                <p className="text-gray-700 text-lg leading-relaxed">{selectedProject.description}</p>
 
-                {/* Link if available and not "null" */}
-                {selected.link && selected.link !== "null" && (
+                {selectedProject.link && selectedProject.link !== "null" && (
                   <a
-                    href={selected.link}
+                    href={selectedProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block mt-4 px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full hover:bg-green-100 transition"
@@ -207,15 +226,15 @@ const Portfolio = () => {
           </div>
         )}
 
-        {/* Video Modal */}
-        {isVideoModalOpen && (
+        {/* Video Modal with multiple videos */}
+        {isVideoModalOpen && selectedProject && (
           <div
             onClick={(e) => {
               if (e.target === e.currentTarget) closeVideoModal();
             }}
-            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center p-4 z-50"
+            className="fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center p-4 z-50"
           >
-            <div className="relative w-full max-w-3xl aspect-video rounded-lg overflow-hidden bg-black">
+            <div className="relative w-full max-w-3xl aspect-video rounded-lg overflow-hidden bg-black flex items-center justify-center">
               <button
                 onClick={closeVideoModal}
                 aria-label="Close Video Demo"
@@ -223,23 +242,53 @@ const Portfolio = () => {
               >
                 &times;
               </button>
-              {youtubeVideoId ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
-                  title="YouTube video player"
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              ) : selected?.src ? (
+
+              {selectedProject.youtubeLinks && selectedProject.youtubeLinks.length > 0 ? (
+                <>
+                  <iframe
+                    key={currentVideoIndex}
+                    src={`https://www.youtube.com/embed/${extractYoutubeID(
+                      selectedProject.youtubeLinks[currentVideoIndex]
+                    )}?autoplay=1`}
+                    title={`YouTube video player ${currentVideoIndex + 1}`}
+                    frameBorder={0}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                  {hasMultipleVideos && (
+                    <div className="absolute bottom-4 left-4 flex space-x-4">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prevVideo();
+                        }}
+                        className="bg-black bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition"
+                      >
+                        Prev
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          nextVideo();
+                        }}
+                        className="bg-black bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : selectedProject.src ? (
                 <video
-                  src={selected.src}
+                  src={selectedProject.src}
                   controls
                   autoPlay
                   className="w-full h-full"
                 />
-              ) : null}
+              ) : (
+                <div className="text-white text-lg">No video available</div>
+              )}
             </div>
           </div>
         )}
