@@ -1,77 +1,106 @@
-
-import { link } from 'fs';
-import { useState } from 'react';
-
+import { useState } from "react";
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-    
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [youtubeVideoId, setYoutubeVideoId] = useState<string | null>(null);
 
   const projects = [
-    
     {
       id: 1,
       title: "Brand Identity Design",
       category: "Logo Design",
-      description: "Complete brand identity package including logo, color palette, and typography guidelines.",
+      description:
+        "Complete brand identity package including logo, color palette, and typography guidelines.",
       image: "🎨",
       color: "from-purple-500 to-pink-500",
-      link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing"
+      link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing",
     },
     {
       id: 2,
       title: "Motion Graphics Reel",
       category: "Motion Graphics",
-      description: "Dynamic motion graphics showcasing various animation techniques and visual effects.",
+      description:
+        "Dynamic motion graphics showcasing various animation techniques and visual effects.",
       image: "🎬",
       color: "from-blue-500 to-cyan-500",
-      src: "/videos/logo-animation.mp4", 
-      link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing"
+      src: "/videos/logo-animation.mp4",
+      link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing",
+      youtubeLink: "https://youtu.be/S6PtKIS0km8", // Added YouTube link here
     },
     {
       id: 3,
       title: "Poster Collection",
       category: "Poster Design",
-      description: "Series of promotional posters featuring creative layouts and visual hierarchy.",
+      description:
+        "Series of promotional posters featuring creative layouts and visual hierarchy.",
       image: "📋",
-      color: "from-green-500 to-emerald-500"
+      color: "from-green-500 to-emerald-500",
     },
     {
       id: 4,
       title: "Video Edit Project",
       category: "Video Editing",
-      description: "Professional video editing with seamless transitions and color grading.",
+      description:
+        "Professional video editing with seamless transitions and color grading.",
       image: "🎥",
       color: "from-red-500 to-orange-500",
-       link: "https://drive.google.com/file/d/10Sdfm5rYh6AJhVWtPIAxJFcMLI5RW_HL/view?usp=sharing"
-      
+      youtubeLink: "https://youtube.com/shorts/B1_FKcY4xUU?feature=share", // Added YouTube link here
     },
+    
     {
       id: 5,
       title: "UI/UX Concepts",
       category: "Digital Design",
-      description: "User interface designs focusing on user experience and modern aesthetics.",
+      description:
+        "User interface designs focusing on user experience and modern aesthetics.",
       image: "💻",
       color: "from-indigo-500 to-purple-500",
-      link: "null"
+      link: "null",
     },
     {
       id: 6,
       title: "Typography Study",
       category: "Typography",
-      description: "Exploration of typeface combinations and typographic hierarchy.",
+      description:
+        "Exploration of typeface combinations and typographic hierarchy.",
       image: "✒️",
-      color: "from-gray-500 to-slate-500"
-    }
+      color: "from-gray-500 to-slate-500",
+    },
   ];
 
-  
+  const selected = projects.find((p) => p.id === selectedProject);
+
+  // Extract YouTube video ID from a URL
+  const extractYoutubeID = (url: string) => {
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
+  const openVideoModal = () => {
+    if (selected?.youtubeLink) {
+      const id = extractYoutubeID(selected.youtubeLink);
+      setYoutubeVideoId(id);
+      setIsVideoModalOpen(true);
+    } else if (selected?.src) {
+      // If no YouTube link but local video src exists, open video modal with local video
+      setYoutubeVideoId(null);
+      setIsVideoModalOpen(true);
+    }
+  };
+
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+    setYoutubeVideoId(null);
+  };
   return (
     <section id="portfolio" className="py-20 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-red-500/5 rounded-full blur-3xl"></div>
-      
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-600 text-sm font-medium mb-6">
@@ -80,7 +109,8 @@ const Portfolio = () => {
           <h2 className="text-5xl font-bold text-gray-900 mb-6">My Portfolio</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A showcase of my creative work spanning graphic design, video editing, and motion graphics.
+            A showcase of my creative work spanning graphic design, video editing,
+            and motion graphics.
           </p>
         </div>
 
@@ -91,14 +121,24 @@ const Portfolio = () => {
               className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer border border-gray-100"
               onClick={() => setSelectedProject(project.id)}
             >
-              <div className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}>
-                <div className="text-6xl group-hover:scale-110 transition-transform duration-500">{project.image}</div>
+              <div
+                className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}
+              >
+                <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
+                  {project.image}
+                </div>
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
               </div>
               <div className="p-6">
-                <div className="inline-block px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full mb-3">{project.category}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">{project.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+                <div className="inline-block px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full mb-3">
+                  {project.category}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {project.description}
+                </p>
                 <div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300">
                   View Details
                   <span className="ml-2">→</span>
@@ -107,56 +147,94 @@ const Portfolio = () => {
             </div>
           ))}
         </div>
-                   
-                  
-                    
+
         {/* Project Modal */}
-        {selectedProject && (
+        {selectedProject && selected && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
-                  <h3 className="text-3xl font-bold text-gray-900">
-                    {projects.find(p => p.id === selectedProject)?.title}
-                  </h3>
+                  <h3 className="text-3xl font-bold text-gray-900">{selected.title}</h3>
                   <button
-                    onClick={() => setSelectedProject(null)}
+                    onClick={() => {
+                      setSelectedProject(null);
+                      setIsVideoModalOpen(false);
+                      setYoutubeVideoId(null);
+                    }}
                     className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all"
                   >
                     ×
                   </button>
                 </div>
-                <div className={`h-64 bg-gradient-to-br ${projects.find(p => p.id === selectedProject)?.color} rounded-2xl flex items-center justify-center mb-6`}>
-                  <div className="text-8xl">{projects.find(p => p.id === selectedProject)?.image}</div>
+                <div
+                  className={`h-64 bg-gradient-to-br ${selected.color} rounded-2xl flex items-center justify-center mb-6`}
+                >
+                  <div className="text-8xl">{selected.image}</div>
+                   {/* Show video play button if src exists */}
+                {selected.src && (
+                  <button
+                    onClick={openVideoModal}
+                    className="-translate-y-24 translate-x-40  mr-4 ml-1 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  >
+                    Play Video
+                  </button>
+                )}
                 </div>
                 <div className="inline-block px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                  {projects.find(p => p.id === selectedProject)?.category}
+                  {selected.category}
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed ">
-                  {projects.find(p => p.id === selectedProject)?.description}
-                </p>
-                {selectedProject && (
-                <a href={projects.find(p => p.id === selectedProject)?.link} target="_blank" rel="noopener noreferrer"><div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                   Click Here to Open projects in new Tab
-                  
-                  <span className="ml-2">→</span>
-                </div>
-                    
-                    </a>)}
-                { /* <a href={projects.find(p => p.id === selectedProject)?.link}> <div className="mt-4 flex items-center text-red-600 text-sm font-medium group-hover:translate-x-2 transition-transform duration-300 inline-block px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full mb-4">
-                   View It...!
-                  
-                  <span className="ml-2">→</span>
-                </div></a> */}
-              {/*direct video play method*/}
-                     {selectedProject && (
-                     <video
-                src={projects.find(p => p.id === selectedProject )?.src}
-                controls
-                className="w-full max-w-md rounded-lg"
-                     />
-                     )}
+                <p className="text-gray-700 text-lg leading-relaxed">{selected.description}</p>
+
+                {/* Link if available and not "null" */}
+                {selected.link && selected.link !== "null" && (
+                  <a
+                    href={selected.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-4 px-4 py-2 bg-green-50 text-red-600 text-sm font-medium rounded-full hover:bg-green-100 transition"
+                  >
+                    Click Here to Open project in new Tab <span className="ml-2">→</span>
+                  </a>
+                )}
+
+              
+
+                {/* Always show button to open your YouTube video */}
+               {/* <button
+                  onClick={openVideoModal}
+                  className="mt-6 ml-4 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                >
+                  Watch My YouTube Video
+                </button>*/} 
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Video Modal */}
+        {isVideoModalOpen && youtubeVideoId && (
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) closeVideoModal();
+            }}
+            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center p-4 z-50"
+          >
+            <div className="relative w-full max-w-3xl aspect-video rounded-lg overflow-hidden bg-black">
+              <button
+                onClick={closeVideoModal}
+                aria-label="Close Video Demo"
+                className="absolute top-2 right-2 text-white text-3xl font-bold z-50 hover:text-red-500"
+              >
+                &times;
+              </button>
+              <iframe
+                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
             </div>
           </div>
         )}
