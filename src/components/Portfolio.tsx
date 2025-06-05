@@ -9,13 +9,16 @@ interface Project {
   color: string;
   link?: string;
   src?: string;
-  youtubeLinks?: string[]; // Changed to array for multiple YouTube links
+  youtubeLinks?: string[]; // Multiple YouTube links
+  imageLinks?: string[]; // Array of image URLs for gallery
 }
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const projects: Project[] = [
     {
@@ -28,6 +31,10 @@ const Portfolio = () => {
       color: "from-purple-500 to-pink-500",
       link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing",
       youtubeLinks: ["https://youtu.be/S6PtKIS0km8"],
+      imageLinks: [
+        "https://placehold.co/600x400/png?text=Image+1+Brand+Identity",
+        "https://placehold.co/600x400/png?text=Image+2+Brand+Identity",
+      ],
     },
     {
       id: 2,
@@ -40,6 +47,9 @@ const Portfolio = () => {
       src: "/videos/logo-animation.mp4",
       link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing",
       youtubeLinks: ["https://youtu.be/S6PtKIS0km8","https://youtu.be/zdniEgUvMfA"],
+      imageLinks: [
+        "https://placehold.co/600x400/png?text=Image+1+Motion+Graphics",
+      ],
     },
     {
       id: 3,
@@ -59,6 +69,11 @@ const Portfolio = () => {
       image: "🎥",
       color: "from-red-500 to-orange-500",
       youtubeLinks: ["https://youtu.be/T1a-LfXIgWU"],
+      imageLinks: [
+        "https://placehold.co/600x400/png?text=Image+1+Video+Edit",
+        "https://placehold.co/600x400/png?text=Image+2+Video+Edit",
+        "https://placehold.co/600x400/png?text=Image+3+Video+Edit",
+      ],
     },
     {
       id: 5,
@@ -90,23 +105,21 @@ const Portfolio = () => {
     return match ? match[1] : null;
   };
 
+  // Video modal controls
   const openVideoModal = () => {
     setCurrentVideoIndex(0);
     setIsVideoModalOpen(true);
   };
-
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
     setCurrentVideoIndex(0);
   };
-
   const nextVideo = () => {
     if (!selectedProject?.youtubeLinks) return;
     setCurrentVideoIndex((prev) =>
       prev + 1 < selectedProject.youtubeLinks!.length ? prev + 1 : 0
     );
   };
-
   const prevVideo = () => {
     if (!selectedProject?.youtubeLinks) return;
     setCurrentVideoIndex((prev) =>
@@ -114,13 +127,32 @@ const Portfolio = () => {
     );
   };
 
+  // Image modal controls
+  const openImageModal = () => {
+    setCurrentImageIndex(0);
+    setIsImageModalOpen(true);
+  };
+  const closeImageModal = () => {
+    setIsImageModalOpen(false);
+    setCurrentImageIndex(0);
+  };
+  const nextImage = () => {
+    if (!selectedProject?.imageLinks) return;
+    setCurrentImageIndex((prev) =>
+      prev + 1 < selectedProject.imageLinks!.length ? prev + 1 : 0
+    );
+  };
+  const prevImage = () => {
+    if (!selectedProject?.imageLinks) return;
+    setCurrentImageIndex((prev) =>
+      prev - 1 >= 0 ? prev - 1 : selectedProject.imageLinks!.length - 1
+    );
+  };
+
   const currentYoutubeId =
     selectedProject && selectedProject.youtubeLinks && selectedProject.youtubeLinks.length > 0
       ? extractYoutubeID(selectedProject.youtubeLinks[currentVideoIndex])
       : null;
-
-  const hasMultipleVideos =
-    selectedProject?.youtubeLinks && selectedProject.youtubeLinks.length > 1;
 
   return (
     <section id="portfolio" className="py-20 bg-white relative overflow-hidden">
@@ -186,7 +218,9 @@ const Portfolio = () => {
                     onClick={() => {
                       setSelectedProject(null);
                       setIsVideoModalOpen(false);
+                      setIsImageModalOpen(false);
                       setCurrentVideoIndex(0);
+                      setCurrentImageIndex(0);
                     }}
                     className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all"
                   >
@@ -203,6 +237,17 @@ const Portfolio = () => {
                       className="absolute bottom-4 right-4 px-6 py-2 rounded-lg text-white font-semibold transition bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:from-pink-600 hover:via-red-600 hover:to-yellow-600"
                     >
                       Play Video
+                    </button>
+                  )}
+                  {selectedProject.imageLinks && selectedProject.imageLinks.length > 0 && (
+                    <button
+                      onClick={() => {
+                        setCurrentImageIndex(0);
+                        setIsImageModalOpen(true);
+                      }}
+                      className="absolute bottom-4 left-4 px-6 py-2 rounded-lg text-white font-semibold transition bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:from-green-500 hover:via-green-600 hover:to-green-700"
+                    >
+                      View Images
                     </button>
                   )}
                 </div>
@@ -256,7 +301,7 @@ const Portfolio = () => {
                     allowFullScreen
                     className="w-full h-full"
                   />
-                  {hasMultipleVideos && (
+                  {selectedProject.youtubeLinks.length > 1 && (
                     <div className="absolute bottom-4 left-4 flex space-x-4">
                       <button
                         onClick={(e) => {
@@ -288,6 +333,59 @@ const Portfolio = () => {
                 />
               ) : (
                 <div className="text-white text-lg">No video available</div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Image Modal with multiple images */}
+        {isImageModalOpen && selectedProject && selectedProject.imageLinks && (
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) closeImageModal();
+            }}
+            className="fixed inset-0 bg-black bg-opacity-90 flex flex-col justify-center items-center p-4 z-50"
+          >
+            <div className="relative max-w-4xl w-full rounded-lg overflow-hidden">
+              <button
+                onClick={closeImageModal}
+                aria-label="Close Image Gallery"
+                className="absolute top-2 right-2 text-white text-3xl font-bold z-50 hover:text-red-500"
+              >
+                &times;
+              </button>
+
+              <img
+                src={selectedProject.imageLinks[currentImageIndex]}
+                alt={`Project image ${currentImageIndex + 1} of ${selectedProject.imageLinks.length}`}
+                className="w-full max-h-[80vh] object-contain rounded-lg"
+              />
+
+              {selectedProject.imageLinks.length > 1 && (
+                <div className="absolute bottom-4 left-4 flex space-x-4">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImageIndex((prev) =>
+                        prev === 0 ? selectedProject.imageLinks!.length - 1 : prev - 1
+                      );
+                    }}
+                    className="bg-black bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition"
+                  >
+                    Prev
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImageIndex((prev) =>
+                        prev + 1 === selectedProject.imageLinks!.length ? 0 : prev + 1
+                      );
+                    }}
+                    className="bg-black bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition"
+                  >
+                    Next
+                  </button>
+                </div>
               )}
             </div>
           </div>

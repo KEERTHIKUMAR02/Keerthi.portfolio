@@ -10,7 +10,7 @@ const Hero = () => {
   };
 
   function handleResumeClick(){
-    window.open("https://drive.google.com/file/d/1PracftXRPmq2svds6xKF2lzPqrj7moQa/view?usp=sharing", "_blank");
+    window.open("https://drive.google.com/file/d/1p7viWnvcdHjw0mkX7ZtfrAiHr9Wj-UT-/view?usp=sharing", "_blank");
     throw new Error('Function not implemented.');
   }
 
