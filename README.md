@@ -1,73 +1,92 @@
-# Welcome to your Lovable project
+# Portfolio
 
-## Project info
+A single-page portfolio site built with React and TypeScript. It presents navigation, hero, about, work samples, services, and a contact form with toast feedback.
 
-**URL**: https://lovable.dev/projects/efd7ecbc-0993-4017-a5ac-bf5ad9af4c9b
+## Technologies
 
-## How can I edit this code?
+### Front end
 
-There are several ways of editing your application.
+| Area | Technologies |
+|------|----------------|
+| **Core** | React 18, TypeScript, Vite |
+| **Routing** | React Router DOM |
+| **Styling** | Tailwind CSS, tailwindcss-animate, tailwind-merge, PostCSS, Autoprefixer |
+| **UI & accessibility** | Radix UI primitives, shadcn-style components in `src/components/ui/` |
+| **Icons** | Lucide React |
+| **Forms & validation** | React Hook Form, Zod, `@hookform/resolvers` |
+| **Data / async** | TanStack Query (React Query) |
+| **Feedback** | Sonner, Radix Toast (custom `useToast` hook) |
+| **Theming** | next-themes (e.g. theme-aware Sonner) |
+| **Other UI** | cmdk, Vaul (drawer), Embla Carousel, react-day-picker, Recharts, react-resizable-panels, input-otp |
+| **Analytics (optional)** | Vercel Speed Insights (`@vercel/speed-insights`) |
 
-**Use Lovable**
+### Back end
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/efd7ecbc-0993-4017-a5ac-bf5ad9af4c9b) and start prompting.
+There is **no custom server or API** in this repository. The production app is a **static SPA** (HTML, JS, CSS) produced by `npm run build`.
 
-Changes made via Lovable will be committed automatically to this repo.
+| Area | Technologies / services |
+|------|-------------------------|
+| **Contact & email** | [EmailJS](https://www.emailjs.com/) — sends mail from the browser via EmailJS’s hosted API (configured in `src/components/Contact.tsx`) |
+| **Hosting** | Static hosting only (e.g. GitHub Pages via `gh-pages`, or any static file host) |
 
-**Use your preferred IDE**
+## Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- npm (comes with Node)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Getting started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+git clone https://github.com/KEERTHIKUMAR02/Keerthi.portfolio.git
+cd Keerthi.portfolio
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The dev server listens on **port 8080** (see `vite.config.ts`). Open the URL shown in the terminal (for example `http://localhost:8080`).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Scripts
 
-**Use GitHub Codespaces**
+| Command | Description |
+|--------|-------------|
+| `npm run dev` | Start Vite in development mode |
+| `npm run build` | Production build to `dist/` |
+| `npm run build:dev` | Build in development mode |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run deploy` | Build then publish `dist/` with **gh-pages** |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project structure
 
-## What technologies are used for this project?
+```
+src/
+├── App.tsx              # Router, providers, global toasters
+├── main.tsx             # Entry
+├── pages/
+│   ├── Index.tsx        # Home (all sections)
+│   └── NotFound.tsx     # 404
+├── components/
+│   ├── Navigation.tsx
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Portfolio.tsx
+│   ├── Services.tsx
+│   ├── Contact.tsx
+│   ├── Footer.tsx
+│   └── ui/              # Shared UI primitives
+├── hooks/               # e.g. use-mobile, use-toast
+└── lib/utils.ts         # `cn()` class name helper
+```
 
-This project is built with:
+## Contact form (EmailJS)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Submissions are sent with [EmailJS](https://www.emailjs.com/). Service ID, template ID, and public key are configured in `src/components/Contact.tsx`. For production, consider moving these to environment variables (`import.meta.env`) and keeping keys out of version control if the repository is public.
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/efd7ecbc-0993-4017-a5ac-bf5ad9af4c9b) and click on Share -> Publish.
+- **GitHub Pages:** The repo includes `gh-pages` and a `deploy` script. If the site is served from a project URL (`https://<user>.github.io/<repo>/`), set Vite’s `base` in `vite.config.ts` to `'/<repo-name>/'` so assets resolve correctly.
+- **Other hosts:** Run `npm run build` and upload the `dist/` folder, or connect the repo to your host’s static-site workflow.
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is private (`"private": true` in `package.json`). Adjust licensing here if you publish the source publicly.
