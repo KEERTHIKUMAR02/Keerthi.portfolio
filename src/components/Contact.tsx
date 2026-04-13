@@ -20,15 +20,15 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        'service_4b6wsze', // Your service ID
-        'template_s4af0dc', // Your template ID
+        'service_ktpftyh', // Your service ID
+        'template_kwuhnmg', // Your template ID
         {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
         },
-        'Rt5Wj2VXzVByO6_oX' // Your public key
+        'RuJVXUnGoDF8euTjw' // Your public key
       );
 
       toast({
