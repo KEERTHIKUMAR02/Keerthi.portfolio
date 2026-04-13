@@ -148,11 +148,10 @@ const Portfolio = () => {
           <div className="inline-flex items-center px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-600 text-sm font-medium mb-6">
             🎨 My Work
           </div>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">My Portfolio</h2>
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">My Projects</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A showcase of my creative work spanning graphic design, video editing,
-            and motion graphics.
+            A collection of my creative work in web development showcasing my skills and passion for design and technology.
           </p>
         </div>
 

@@ -71,7 +71,7 @@ const Contact = () => {
           <h2 className="text-5xl font-bold text-gray-900 mb-6">Get In Touch</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to bring your creative vision to life? Let's discuss your project and create something amazing together.
+            I’m currently available for exciting projects and full-time opportunities.
           </p>
         </div>
 
@@ -81,8 +81,9 @@ const Contact = () => {
             <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">Let's Talk</h3>
               <p className="text-gray-700 mb-8 text-lg leading-relaxed">
-                I'm always excited to work on new projects and collaborate with creative minds. 
-                Feel free to reach out for any design inquiries or just to say hello!
+                Interested in working together or have an opportunity for me? Feel free to reach out.
+                 I’m always open to discussing new projects, creative ideas, or full-time roles.
+                 Open to full-time opportunities. Available to join immediately.
               </p>
 
               <div className="space-y-6">

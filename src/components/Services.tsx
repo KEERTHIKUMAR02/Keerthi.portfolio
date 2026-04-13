@@ -78,9 +78,9 @@ const Services = () => {
 
         <div className="text-center mt-16">
           <div className="inline-block p-8 bg-white rounded-3xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Have a project in mind?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Available for Work</h3>
             <p className="text-gray-600 mb-6 max-w-md">
-              Let's transform your vision into a captivating reality. I'm here to make your digital presence shine.
+              I’m currently available for exciting projects and full-time opportunities.
             </p>
             <button
               onClick={() => {
@@ -89,7 +89,7 @@ const Services = () => {
               }}
               className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium group"
             >
-              Book Now
+              Join Now
               <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
             </button>
           </div>
