@@ -1,5 +1,5 @@
 
-import { Film, Palette, FileText, Code, Atom } from 'lucide-react';
+import { Film, Palette, FileText, Code, Atom, Coffee } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -18,7 +18,7 @@ const Services = () => {
       bgColor: "from-blue-50 to-cyan-50"
     },
     {
-      icon: <FileText className="w-8 h-8" />,
+      icon: <Coffee className="w-8 h-8" />,
       title: "Java",
       description: "Java development services that deliver high-performance, scalable, and secure applications tailored to your business needs.",
       color: "from-green-500 to-emerald-500",
