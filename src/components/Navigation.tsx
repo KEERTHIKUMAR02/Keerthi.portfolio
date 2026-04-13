@@ -28,10 +28,10 @@ const Navigation = () => {
               About
             </button>
             <button onClick={() => scrollToSection('portfolio')} className="text-gray-600 hover:text-gray-900 transition-colors">
-              Portfolio
+              Projects
             </button>
             <button onClick={() => scrollToSection('services')} className="text-gray-600 hover:text-gray-900 transition-colors">
-              Services
+              Skills
             </button>
             <button onClick={() => scrollToSection('contact')} className="text-gray-600 hover:text-gray-900 transition-colors">
               Contact
@@ -61,10 +61,10 @@ const Navigation = () => {
               About
             </button>
             <button onClick={() => scrollToSection('portfolio')} className="block text-gray-600 hover:text-gray-900 transition-colors">
-              Portfolio
+              Projects
             </button>
             <button onClick={() => scrollToSection('services')} className="block text-gray-600 hover:text-gray-900 transition-colors">
-              Services
+              Skills
             </button>
             <button onClick={() => scrollToSection('contact')} className="block text-gray-600 hover:text-gray-900 transition-colors">
               Contact
