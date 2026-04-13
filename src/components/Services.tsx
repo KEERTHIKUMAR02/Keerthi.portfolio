@@ -1,5 +1,5 @@
 
-import { Film, Palette, FileText, Code, Atom, Coffee } from 'lucide-react';
+import { Film, Palette, FileText, Code, Atom, Coffee, Cloud } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -25,7 +25,7 @@ const Services = () => {
       bgColor: "from-green-50 to-emerald-50"
     },
     {
-      icon: <Palette className="w-8 h-8" />,
+      icon: <Cloud className="w-8 h-8" />,
       title: "Cloud Computing",
       description: "AWS cloud solutions that optimize performance, scalability, and security for your applications in the cloud.",
       color: "from-purple-500 to-indigo-500",
