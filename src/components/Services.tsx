@@ -1,10 +1,10 @@
 
-import { Film, Palette, FileText, Video } from 'lucide-react';
+import { Film, Palette, FileText, Code } from 'lucide-react';
 
 const Services = () => {
   const services = [
     {
-      icon: <Video className="w-8 h-8" />,
+      icon: <Code className="w-8 h-8" />,
       title: "Python Development",
       description: "Skilled in developing robust and efficient Python applications with a focus on clean code and best practices.",
       color: "from-red-500 to-pink-500",
