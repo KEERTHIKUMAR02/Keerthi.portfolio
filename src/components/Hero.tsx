@@ -75,7 +75,7 @@ const Hero = () => {
                 <div className="text-sm text-gray-600">Graduate</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-gray-900">10+</div>
+                <div className="text-3xl font-bold text-gray-900">4+</div>
                 <div className="text-sm text-gray-600">Projects</div>
               </div>
               <div>
