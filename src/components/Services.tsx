@@ -5,29 +5,29 @@ const Services = () => {
   const services = [
     {
       icon: <Video className="w-8 h-8" />,
-      title: "Video Editing",
-      description: "Professional video editing with seamless transitions, color grading, and audio enhancement to bring your stories to life.",
+      title: "Python Development",
+      description: "Skilled in developing robust and efficient Python applications with a focus on clean code and best practices.",
       color: "from-red-500 to-pink-500",
       bgColor: "from-red-50 to-pink-50"
     },
     {
       icon: <Film className="w-8 h-8" />,
-      title: "Motion Graphics",
-      description: "Dynamic motion graphics and animations that captivate audiences and enhance visual storytelling with modern techniques.",
+      title: "ReactJs",
+      description: "ReactJs development services that create dynamic, responsive, and user-friendly web applications with modern design principles.",
       color: "from-blue-500 to-cyan-500",
       bgColor: "from-blue-50 to-cyan-50"
     },
     {
       icon: <FileText className="w-8 h-8" />,
-      title: "Poster Design",
-      description: "Creative poster designs that effectively communicate your message with striking visuals and thoughtful typography.",
+      title: "Java",
+      description: "Java development services that deliver high-performance, scalable, and secure applications tailored to your business needs.",
       color: "from-green-500 to-emerald-500",
       bgColor: "from-green-50 to-emerald-50"
     },
     {
       icon: <Palette className="w-8 h-8" />,
-      title: "Logo Design",
-      description: "Memorable brand identities and logos that represent your vision with clean, modern, and timeless design principles.",
+      title: "Cloud Computing",
+      description: "AWS cloud solutions that optimize performance, scalability, and security for your applications in the cloud.",
       color: "from-purple-500 to-indigo-500",
       bgColor: "from-purple-50 to-indigo-50"
     }
@@ -44,11 +44,10 @@ const Services = () => {
           <div className="inline-flex items-center px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-600 text-sm font-medium mb-6">
             💼 What I Offer
           </div>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">My Services</h2>
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">My Skills</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            I offer comprehensive design services that blend creativity with technical expertise 
-            to deliver exceptional results for your projects.
+            Proficient in developing end-to-end applications using technologies like Python, Java, React.js, and cloud platforms, with a focus on performance and scalability.
           </p>
         </div>
 
