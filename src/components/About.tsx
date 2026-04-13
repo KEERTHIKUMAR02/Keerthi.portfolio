@@ -75,8 +75,8 @@ const About = () => {
                   Passion
                 </h4>
                 <p className="text-gray-700">
-                  Graphic design, video editing, and motion graphics with a focus on bringing fresh, 
-                  innovative ideas to creative projects.
+                  I am passionate about leveraging technology to create impactful and intelligent solutions. 
+                  From full-stack development to AI-based systems, I focus on building products that are efficient, scalable, and user-centric.
                 </p>
               </div>
 
@@ -88,9 +88,9 @@ const About = () => {
                   Goal
                 </h4>
                 <p className="text-gray-700">
-                  To contribute technical expertise and creative enthusiasm to a dynamic team 
-                  while continuously learning and growing in the design field.
-                </p>
+                  My goal is to continuously grow as a developer, master modern technologies, 
+                  and contribute to building innovative products that solve real-world problems.
+                 </p>
               </div>
             </div>
 
