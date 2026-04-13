@@ -10,7 +10,7 @@ const Hero = () => {
   };
 
   function handleResumeClick(){
-    window.open("https://drive.google.com/file/d/1p7viWnvcdHjw0mkX7ZtfrAiHr9Wj-UT-/view?usp=sharing", "_blank");
+    window.open("https://drive.google.com/file/d/1svJh3o03Aq0syr0hx1xxHqAFANZKTYs9/view?usp=sharing", "_blank");
     throw new Error('Function not implemented.');
   }
 
@@ -38,15 +38,14 @@ const Hero = () => {
               </h1>
               
               <h2 className="text-2xl lg:text-3xl text-gray-600 font-light leading-relaxed">
-                Computer Science Graduate &{' '}
-                <span className="font-medium text-gray-800">Creative Designer</span>
+                Computer Science Graduate {' '}
+                <span className="font-medium text-gray-800"></span>
               </h2>
             </div>
             
             <p className="text-xl text-gray-700 leading-relaxed max-w-2xl">
-              Creative and detail-oriented Computer Science graduate with a keen interest in graphic design. 
-              Eager to apply technical skills and design principles in an entry-level design role. 
-              Aiming to contribute fresh ideas and enthusiasm to a creative team.
+              Full-stack developer with expertise in ReactJs And Python experienced in building scalable web applications and intelligent solutions. 
+              Passionate about solving real-world problems using modern technologies and continuous learning.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
