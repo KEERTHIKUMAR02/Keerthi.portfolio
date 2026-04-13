@@ -1,5 +1,5 @@
 
-import { Film, Palette, FileText, Code } from 'lucide-react';
+import { Film, Palette, FileText, Code, Atom } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -11,7 +11,7 @@ const Services = () => {
       bgColor: "from-red-50 to-pink-50"
     },
     {
-      icon: <Film className="w-8 h-8" />,
+      icon: <Atom className="w-8 h-8" />,
       title: "ReactJs",
       description: "ReactJs development services that create dynamic, responsive, and user-friendly web applications with modern design principles.",
       color: "from-blue-500 to-cyan-500",
