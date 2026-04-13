@@ -23,14 +23,14 @@ const Portfolio = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Brand Identity Design",
-      category: "Logo Design",
+      title: "SourceMatch ",
+      category: "AI Recruitment Platform",
       description:
-        "Complete brand identity package including logo, color palette, and typography guidelines.",
-      image: "🎨",
+        "Developed a full-stack AI-powered recruitment system that intelligently matches candidates with job opportunities using semantic skill analysis.",
+      image: "🤖",
       color: "from-purple-500 to-pink-500",
-      link: "https://drive.google.com/drive/folders/1fjZMTG8IdfmWans9Cz2wIuFKn9_oG7bE?usp=sharing",
-      youtubeLinks: ["https://youtu.be/S6PtKIS0km8"],
+      link: "",
+      youtubeLinks: [""],
       imageLinks: [
         "https://placehold.co/600x400/png?text=Image+1+Brand+Identity",
         "https://placehold.co/600x400/png?text=Image+2+Brand+Identity",
@@ -38,62 +38,45 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      title: "Motion Graphics Reel",
-      category: "Motion Graphics",
+      title: "TUNELYTE",
+      category: "Music Web Application",
       description:
-        "Dynamic motion graphics showcasing various animation techniques and visual effects.",
-      image: "🎬",
+        " Designed and developed TuneLyte, a responsive web application for music playback and management.",
+      image: "🎵",
       color: "from-blue-500 to-cyan-500",
-      src: "/videos/logo-animation.mp4",
-      link: "https://drive.google.com/drive/folders/1Jh4qMKKtNHyxXqiFk_j0JV-Zrxo2bajU?usp=sharing",
-      youtubeLinks: ["https://youtu.be/S6PtKIS0km8","https://youtu.be/zdniEgUvMfA"],
+      src: "",
+      link: "",
+      youtubeLinks: ["",""],
       imageLinks: [
         "https://placehold.co/600x400/png?text=Image+1+Motion+Graphics",
       ],
     },
     {
       id: 3,
-      title: "Poster Collection",
-      category: "Poster Design",
+      title: "Contact Saving Through Voice Recognition",
+      category: "AI Voice Assistant",
       description:
-        "Series of promotional posters featuring creative layouts and visual hierarchy.",
-      image: "📋",
+        "Implemented a voice-activated contact saving system that utilizes speech recognition to capture and store contact information efficiently.",
+      image: "📞",
       color: "from-green-500 to-emerald-500",
     },
     {
       id: 4,
-      title: "Video Edit Project",
-      category: "Video Editing",
+      title: "Portfolio ",
+      category: "Creative Portfolio",
       description:
-        "Professional video editing with seamless transitions and color grading.",
-      image: "🎥",
+        "A collection of my creative work in web development showcasing my skills and passion for design and technology.",
+      image: "🎨",
       color: "from-red-500 to-orange-500",
-      youtubeLinks: ["https://youtu.be/T1a-LfXIgWU"],
+      youtubeLinks: [""],
       imageLinks: [
         "https://placehold.co/600x400/png?text=Image+1+Video+Edit",
         "https://placehold.co/600x400/png?text=Image+2+Video+Edit",
         "https://placehold.co/600x400/png?text=Image+3+Video+Edit",
       ],
     },
-    {
-      id: 5,
-      title: "UI/UX Concepts",
-      category: "Digital Design",
-      description:
-        "User interface designs focusing on user experience and modern aesthetics.",
-      image: "💻",
-      color: "from-indigo-500 to-purple-500",
-      link: "null",
-    },
-    {
-      id: 6,
-      title: "Typography Study",
-      category: "Typography",
-      description:
-        "Exploration of typeface combinations and typographic hierarchy.",
-      image: "✒️",
-      color: "from-gray-500 to-slate-500",
-    },
+    
+     
   ];
 
   // Extract YouTube video ID from a URL robustly

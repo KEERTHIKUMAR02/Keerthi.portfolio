@@ -49,8 +49,9 @@ const About = () => {
             </h3>
             
             <p className="text-xl text-gray-700 leading-relaxed">
-              I've always been fascinated by the intersection of technology and creativity. 
-              My career has been dedicated to finding the perfect balance between the two.
+             I've always been fascinated by the intersection of technology and creativity.
+              My career has been dedicated to finding the perfect balance between the two,
+               developing intelligent and user-centric applications that solve real-world problems.
             </p>
 
             <div className="grid gap-6">
