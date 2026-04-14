@@ -88,7 +88,7 @@ const Services = () => {
               }}
               className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium group"
             >
-              Join Now
+              Hire now 
               <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
             </button>
           </div>
