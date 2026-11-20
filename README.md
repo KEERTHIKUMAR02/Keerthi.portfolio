@@ -29,6 +29,7 @@ There is **no custom server or API** in this repository. The production app is a
 | **Contact & email** | [EmailJS](https://www.emailjs.com/) — sends mail from the browser via EmailJS’s hosted API (configured in `src/components/Contact.tsx`) |
 | **Hosting** | Static hosting only (e.g. GitHub Pages via `gh-pages`, or any static file host) |
 
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (LTS recommended)

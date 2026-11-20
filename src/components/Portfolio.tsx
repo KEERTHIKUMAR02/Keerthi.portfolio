@@ -75,6 +75,16 @@ const Portfolio = () => {
         "https://placehold.co/600x400/png?text=Image+3+Video+Edit",
       ],
     },
+    {
+      id: 5,
+      title: "Indic Dub Studio Live",
+      category: "AI Dubbing Platform",
+      description:
+        "A live dubbing studio experience for creating and managing Indic-language audio and video content with a modern, intuitive workflow.",
+      image: "🎙️",
+      color: "from-indigo-500 to-violet-500",
+      link: "https://indic-dub-studio-849461483131.asia-south1.run.app/",
+    },
     
      
   ];
